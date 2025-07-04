@@ -1,0 +1,4 @@
+main\service\AsistenciaService.class
+main\database\ConexionBD.class
+main\database\InicializadorBD.class
+main\MainApp.class
