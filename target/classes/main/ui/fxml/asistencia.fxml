@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="main.ui.AsistenciaController">
+    <children>
+        <VBox spacing="20" style="-fx-background-color: #f4f4f4;" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <HBox spacing="10">
+                <Label text="RUT:"/>
+                <TextField fx:id="txtRut" promptText="Ingrese RUT o escanee QR" prefWidth="180"/>
+                <Label text="Tipo:"/>
+                <ComboBox fx:id="cmbTipo" prefWidth="120"/>
+                <Button text="Marcar Asistencia" onAction="#marcarAsistencia"/>
+                <Button text="Marcar con QR" onAction="#marcarAsistenciaQR"/>
+                <Button text="🔄 Refrescar" onAction="#refrescarTabla"/>
+            </HBox>
+
+            <TableView fx:id="tablaAsistencias" prefHeight="250">
+                <columns>
+                    <TableColumn fx:id="colFecha" text="Fecha"/>
+                    <TableColumn fx:id="colHora" text="Hora"/>
+                    <TableColumn fx:id="colRut" text="RUT"/>
+                    <TableColumn fx:id="colTipo" text="Tipo"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,4 +1,14 @@
-main\service\AsistenciaService.class
-main\database\ConexionBD.class
+main\model\Liquidacion.class
+main\model\Asistencia.class
 main\database\InicializadorBD.class
+main\model\Descuento.class
+main\service\AsistenciaService.class
+main\service\LiquidacionService.class
 main\MainApp.class
+main\ui\MainController.class
+main\database\ConexionBD.class
+main\ui\LiquidacionController.class
+main\service\EmpleadoService.class
+main\ui\AsistenciaController.class
+main\ui\EmpleadoController.class
+main\model\Empleado.class

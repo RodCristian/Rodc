@@ -65,4 +65,39 @@ public class LiquidacionService {
 
         return lista;
     }
+
+    public static void generarLiquidacion(String rut, String mes, double descuentos) {
+        double horas = calcularHorasMes(rut, mes);
+        double sueldoBase = obtenerSueldoBase(rut);
+        double bonificaciones = calcularBonificaciones(rut, mes);
+        double sueldoLiquido = sueldoBase + bonificaciones - descuentos;
+
+        Liquidacion liq = new Liquidacion();
+        liq.setRutEmpleado(rut);
+        liq.setMes(mes);
+        liq.setSueldoBase(sueldoBase);
+        liq.setTotalHoras(horas);
+        liq.setBonificaciones(bonificaciones);
+        liq.setDescuentos(descuentos);
+        liq.setSueldoLiquido(sueldoLiquido);
+        liq.setFechaGeneracion(LocalDate.now());
+
+        guardarLiquidacion(liq);
+    }
+
+    // Calcula las horas trabajadas en el mes usando AsistenciaService
+    public static double calcularHorasMes(String rut, String mes) {
+        return AsistenciaService.calcularHorasMes(rut, mes);
+    }
+
+    // Obtiene el sueldo base del empleado desde la base de datos
+    public static double obtenerSueldoBase(String rut) {
+        return EmpleadoService.obtenerSueldoBase(rut);
+    }
+
+    // Calcula bonificaciones (puedes personalizar la lógica)
+    public static double calcularBonificaciones(String rut, String mes) {
+        // Ejemplo: sin bonificaciones fijas
+        return 0.0;
+    }
 }

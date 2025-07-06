@@ -122,4 +122,45 @@ public class EmpleadoService {
             System.out.println("❌ Error al eliminar empleado: " + e.getMessage());
         }
     }
+
+    public static List<Empleado> obtenerEmpleados() {
+        List<Empleado> lista = new ArrayList<>();
+        String sql = "SELECT * FROM EMPLEADO";
+        try (Connection conn = ConexionBD.conectar();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Empleado emp = new Empleado();
+                emp.setRut(rs.getString("rut"));
+                emp.setNombre(rs.getString("nombre"));
+                emp.setApellido(rs.getString("apellido"));
+                emp.setFechaIngreso(LocalDate.parse(rs.getString("fecha_ingreso")));
+                emp.setCargo(rs.getString("cargo"));
+                emp.setSueldoBase(rs.getDouble("sueldo_base"));
+                emp.setAfp(rs.getString("afp"));
+                emp.setFonasa(rs.getString("fonasa"));
+                emp.setCategoria(rs.getString("categoria"));
+                emp.setEstado(rs.getString("estado"));
+                lista.add(emp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public static double obtenerSueldoBase(String rut) {
+        String sql = "SELECT sueldo_base FROM EMPLEADO WHERE rut = ?";
+        try (Connection conn = ConexionBD.conectar();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, rut);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("sueldo_base");
+            }
+        } catch (Exception e) {
+            System.out.println("❌ Error al obtener sueldo base: " + e.getMessage());
+        }
+        return 0.0;
+    }
 }
