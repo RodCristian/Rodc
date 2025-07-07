@@ -7,7 +7,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
 import main.model.Empleado;
 import main.service.EmpleadoService;
 
@@ -173,20 +172,29 @@ public class EmpleadoController {
 
     private void generarYGuardarQR(String rut) {
         try {
+            // Crear el código QR
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(rut, BarcodeFormat.QR_CODE, 200, 200);
 
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Guardar QR del empleado");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagen PNG", "*.png"));
-            // Usar la ventana principal de la tabla para mostrar el diálogo
-            java.io.File file = fileChooser.showSaveDialog(tablaEmpleados.getScene().getWindow());
-            if (file != null) {
-                MatrixToImageWriter.writeToPath(bitMatrix, "PNG", file.toPath());
-                mostrarAlerta(Alert.AlertType.INFORMATION, "QR generado y guardado correctamente.");
+            // Carpeta predeterminada
+            String folderPath = "QR";
+            java.io.File folder = new java.io.File(folderPath);
+            if (!folder.exists()) {
+                folder.mkdirs(); // crea la carpeta si no existe
             }
+
+            // Nombre de archivo (ej: QR_12345678-9.png)
+            String nombreArchivo = "QR_" + rut + ".png";
+            java.io.File file = new java.io.File(folder, nombreArchivo);
+
+            // Guardar el QR como imagen PNG
+            MatrixToImageWriter.writeToPath(bitMatrix, "PNG", file.toPath());
+
+            mostrarAlerta(Alert.AlertType.INFORMATION, "QR guardado automáticamente en: " + file.getAbsolutePath());
+
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error al generar QR: " + e.getMessage());
         }
     }
+
 }

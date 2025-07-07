@@ -14,19 +14,19 @@ public class MainController {
 
     @FXML
     private void mostrarEmpleados() throws Exception {
-        Parent vista = FXMLLoader.load(getClass().getResource("/main/ui/fxml/empleado.fxml"));
+        Parent vista = FXMLLoader.load(getClass().getResource("/empleado.fxml"));
         contenidoPane.getChildren().setAll(vista);
     }
 
     @FXML
     private void mostrarLiquidaciones() throws Exception {
-        Parent vista = FXMLLoader.load(getClass().getResource("/main/ui/fxml/liquidacion.fxml"));
+        Parent vista = FXMLLoader.load(getClass().getResource("/liquidacion.fxml"));
         contenidoPane.getChildren().setAll(vista);
     }
 
     @FXML
     private void mostrarAsistencia() throws Exception {
-        Parent vista = FXMLLoader.load(getClass().getResource("/main/ui/fxml/asistencia.fxml"));
+        Parent vista = FXMLLoader.load(getClass().getResource("/asistencia.fxml"));
         contenidoPane.getChildren().setAll(vista);
     }
 }

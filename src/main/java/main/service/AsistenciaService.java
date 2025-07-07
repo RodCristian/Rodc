@@ -8,27 +8,59 @@ import java.util.List;
 import main.database.ConexionBD;
 import main.model.Asistencia;
 
+/**
+ * Servicio para manejar las operaciones de asistencia de empleados.
+ * Permite registrar asistencias, listar asistencias por empleado y calcular
+ * horas trabajadas en un mes.
+ */
 public class AsistenciaService {
-
+    /**
+     * Registra una asistencia de un empleado.
+     *
+     * @param rut  RUT del empleado.
+     * @param tipo Tipo de asistencia (entrada/salida).
+     */
     public static void registrarAsistencia(String rut, String tipo) {
-        String sql = "INSERT INTO ASISTENCIA (rut_empleado, fecha, hora, tipo) VALUES (?, ?, ?, ?)";
+        /**
+         * Registra una asistencia de un empleado en la base de datos.
+         * Valida que el RUT no sea nulo o vacío.
+         */
 
+        // Validación del RUT si el RUT es nulo o vacío lanza un mensaje de error.
+        if (rut == null || rut.isEmpty()) {
+            System.out.println("❌ RUT no puede ser nulo o vacío.");
+            return;
+        }
+        // Sentencia SQL para insertar una nueva asistencia.
+        String sql = "INSERT INTO ASISTENCIA (rut_empleado, fecha, hora, tipo) VALUES (?, ?, ?, ?)";
+        // Conexión a la base de datos y ejecución de la sentencia SQL.
+        // Utiliza try-with-resources para asegurar el cierre de recursos.
         try (Connection conn = ConexionBD.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+            // Establece los parámetros de la sentencia SQL.
+            // Utiliza LocalDate y LocalTime para obtener la fecha y hora actuales.
             stmt.setString(1, rut);
             stmt.setString(2, LocalDate.now().toString()); // yyyy-MM-dd ✅
             stmt.setString(3, LocalTime.now().withNano(0).toString()); // HH:mm:ss ✅
             stmt.setString(4, tipo);
-
+            // Ejecuta la sentencia SQL y obtiene el número de filas afectadas.
+            // Si la inserción es exitosa, imprime el número de filas insertadas.
             int rows = stmt.executeUpdate();
             System.out.println("✅ Filas insertadas: " + rows + " para RUT: " + rut);
-
+            // Manejo de excepciones para capturar errores durante la conexión o ejecución
+            // de la sentencia SQL.
         } catch (Exception e) {
             System.out.println("❌ Error registrando asistencia: " + e.getMessage());
         }
     }
 
+    /**
+     * Lista las asistencias de un empleado o todas las asistencias si no se
+     * especifica un RUT.
+     *
+     * @param rutEmpleado RUT del empleado (opcional).
+     * @return Lista de asistencias.
+     */
     public static List<Asistencia> listarAsistenciasPorEmpleado(String rutEmpleado) {
         List<Asistencia> lista = new ArrayList<>();
         String sql;

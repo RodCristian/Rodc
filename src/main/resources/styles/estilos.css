@@ -1,0 +1,129 @@
+/* Tipografía y base */
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", "Arial", sans-serif;
+    -fx-font-size: 15px;
+    -fx-background-color: linear-gradient(to bottom, #f8fafc, #e8edf3);
+}
+
+/* Barra de Menú */
+.menu-bar {
+    -fx-background-color: linear-gradient(to right, #2c3e50, #2980b9);
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: transparent transparent #2980b9 transparent;
+    -fx-effect: dropshadow(gaussian, #00000033, 3, 0, 0, 1);
+}
+
+.menu {
+    -fx-text-fill: #fff;
+    /* -fx-font-weight: bold; */ /* <-- Eliminado */
+    -fx-padding: 0 16 0 16;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #222;
+    -fx-font-size: 14px;
+}
+.menu-item:hover {
+    -fx-background-color: #e3e9f3;
+    -fx-text-fill: #207cca;
+}
+
+/* Panel central */
+#contenidoPane {
+    -fx-background-color: rgba(129, 211, 233, 0.18);
+    -fx-border-color: #207cca;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(gaussian, #98c8e8cc, 8, 0, 0, 2);
+}
+
+/* Botones */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #207cca 0%, #3498db 100%);
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    /* -fx-font-weight: bold; */ /* <-- Eliminado */
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 7 18 7 18;
+    -fx-border-color: #176ba0;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, #acd6ea77, 5, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #176ba0 0%, #207cca 100%);
+    -fx-effect: dropshadow(gaussian, #176ba0aa, 10, 0, 0, 2);
+    -fx-text-fill: #e3e9f3;
+}
+
+/* TextField y ComboBox */
+.text-field, .combo-box {
+    -fx-background-color: #fff;
+    -fx-border-color: #207cca;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10 5 10;
+    -fx-font-size: 13px;
+}
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: #2980b9;
+    -fx-effect: dropshadow(gaussian, #207cca44, 6, 0, 0, 1);
+}
+
+/* Mejorar la fuente y el color en la tabla */
+.table-view {
+    -fx-font-size: 15px;
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #207cca;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-table-cell-border-color: #e3e9f3;
+}
+
+.table-row-cell {
+    -fx-font-size: 15px;
+    -fx-text-fill: #222; /* color de texto oscuro */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: linear-gradient(to right, #c2e9fb, #83a4d4);
+    -fx-text-fill: #222; /* color de texto para fila seleccionada */
+}
+
+.table-cell {
+    -fx-padding: 8 10 8 10; /* más espacio en las celdas */
+    -fx-font-size: 15px;
+    -fx-text-fill: #222; /* texto oscuro */
+    -fx-background-color: transparent;
+}
+
+.table-column-header-background {
+    -fx-background-color: linear-gradient(to top, #207cca, #3498db);
+}
+
+.table-column-header, .table-column {
+    -fx-text-fill: #030303;
+    -fx-font-size: 16px;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: #b2d8f7;
+}
+
+/* Etiquetas y títulos */
+.label, .text {
+    -fx-font-size: 15px;
+    -fx-text-fill: #222;
+}
+
+.label.title, .text.title {
+    -fx-font-size: 22px;
+    /* -fx-font-weight: bold; */ /* <-- Eliminado */
+    -fx-text-fill: #207cca;
+    -fx-effect: dropshadow(gaussian, #acd6ea77, 3, 0, 0, 1);
+}

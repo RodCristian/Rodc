@@ -80,7 +80,8 @@ public class AsistenciaController {
             String rut = result.getText();
 
             // Preguntar tipo de marcaje
-            ChoiceDialog<String> dialog = new ChoiceDialog<>("Entrada", "Entrada", "Salida");
+            ChoiceDialog<String> dialog = new ChoiceDialog<>("Entrada", "Entrada1", "Salida-Almorzar", "Entrada2",
+                    "Salida");
             dialog.setTitle("Tipo de Asistencia");
             dialog.setHeaderText("Selecciona tipo de marcaje");
             dialog.setContentText("Tipo:");
@@ -98,7 +99,7 @@ public class AsistenciaController {
     }
 
     private void cargarAsistencias() {
-        // 1. Traemos TODO desde la BD
+        // 1. Traemos todo
         List<Asistencia> lista = AsistenciaService.listarAsistenciasPorEmpleado(null);
 
         // 2. Mensaje de depuración

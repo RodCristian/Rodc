@@ -5,7 +5,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
 import main.model.Empleado;
 import main.model.Liquidacion;
 import main.service.EmpleadoService;
@@ -92,14 +91,19 @@ public class LiquidacionController {
             return;
         }
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Guardar Liquidación como PDF");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivo PDF", "*.pdf"));
-        java.io.File file = fileChooser.showSaveDialog(tablaLiquidaciones.getScene().getWindow());
-        if (file == null)
-            return;
-
         try {
+            // Carpeta predeterminada "pdfs"
+            String folderPath = "Liquidaciones";
+            java.io.File folder = new java.io.File(folderPath);
+            if (!folder.exists()) {
+                folder.mkdirs(); // crea la carpeta si no existe
+            }
+
+            // Nombre de archivo único por ID o fecha
+            String nombreArchivo = "Liquidacion_" + seleccionada.getRutEmpleado() + ".pdf";
+            java.io.File file = new java.io.File(folder, nombreArchivo);
+
+            // Crear y escribir el PDF
             Document document = new Document();
             PdfWriter.getInstance(document, new java.io.FileOutputStream(file));
             document.open();
@@ -116,7 +120,10 @@ public class LiquidacionController {
             document.add(new Paragraph("Fecha Generación: " + seleccionada.getFechaGeneracion()));
 
             document.close();
-            mostrarAlerta(Alert.AlertType.INFORMATION, "PDF generado correctamente.");
+
+            mostrarAlerta(Alert.AlertType.INFORMATION,
+                    "PDF guardado automáticamente en la carpeta: " + folder.getAbsolutePath());
+
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error al generar PDF: " + e.getMessage());
         }
