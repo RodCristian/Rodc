@@ -92,37 +92,67 @@ public class LiquidacionController {
         }
 
         try {
-            // Carpeta predeterminada "pdfs"
+            Empleado emp = EmpleadoService.buscarEmpleado(seleccionada.getRutEmpleado()); // ✔️ Necesario para nombre y
+                                                                                          // cargo
+
             String folderPath = "Liquidaciones";
             java.io.File folder = new java.io.File(folderPath);
-            if (!folder.exists()) {
-                folder.mkdirs(); // crea la carpeta si no existe
-            }
+            if (!folder.exists())
+                folder.mkdirs();
 
-            // Nombre de archivo único por ID o fecha
-            String nombreArchivo = "Liquidacion_" + seleccionada.getRutEmpleado() + ".pdf";
+            String nombreArchivo = "Liquidacion_" + seleccionada.getRutEmpleado() + "_" + seleccionada.getMes()
+                    + ".pdf";
             java.io.File file = new java.io.File(folder, nombreArchivo);
 
-            // Crear y escribir el PDF
             Document document = new Document();
             PdfWriter.getInstance(document, new java.io.FileOutputStream(file));
             document.open();
 
-            document.add(new Paragraph("Liquidación de Sueldo"));
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16);
+            Font sectionFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
+            Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 11);
+
+            // Título centrado
+            Paragraph titulo = new Paragraph("LIQUIDACIÓN DE SUELDO", titleFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            document.add(titulo);
             document.add(new Paragraph(" "));
-            document.add(new Paragraph("Empleado: " + cmbEmpleado.getValue()));
-            document.add(new Paragraph("Mes: " + seleccionada.getMes()));
-            document.add(new Paragraph("Sueldo Base: " + seleccionada.getSueldoBase()));
-            document.add(new Paragraph("Total Horas: " + seleccionada.getTotalHoras()));
-            document.add(new Paragraph("Bonificaciones: " + seleccionada.getBonificaciones()));
-            document.add(new Paragraph("Descuentos: " + seleccionada.getDescuentos()));
-            document.add(new Paragraph("Sueldo Líquido: " + seleccionada.getSueldoLiquido()));
-            document.add(new Paragraph("Fecha Generación: " + seleccionada.getFechaGeneracion()));
+
+            // Datos personales
+            document.add(new Paragraph("Nombre del Trabajador     : " + (emp != null ? emp.getNombre() : "N/A"),
+                    normalFont));
+            document.add(new Paragraph("RUT                       : " + seleccionada.getRutEmpleado(), normalFont));
+            document.add(
+                    new Paragraph("Cargo                     : " + (emp != null ? emp.getCargo() : "N/A"), normalFont));
+            document.add(new Paragraph("Fecha de Emisión          : " + seleccionada.getFechaGeneracion(), normalFont));
+            document.add(new Paragraph("Periodo de Liquidación    : " + seleccionada.getMes(), normalFont));
+
+            document.add(new Paragraph("------------------------------------------------------------", normalFont));
+            document.add(new Paragraph("Haberes:", sectionFont));
+            document.add(new Paragraph(
+                    String.format(" - Sueldo Base            : $%,.0f", seleccionada.getSueldoBase()), normalFont));
+            document.add(new Paragraph(
+                    String.format(" - Bonificaciones         : $%,.0f", seleccionada.getBonificaciones()), normalFont));
+            document.add(new Paragraph(
+                    String.format(" - Horas Trabajadas       : %.2f hrs", seleccionada.getTotalHoras()), normalFont));
+
+            document.add(new Paragraph("------------------------------------------------------------", normalFont));
+            document.add(new Paragraph("Descuentos:", sectionFont));
+            document.add(new Paragraph(
+                    String.format(" - Descuentos Aplicados   : $%,.0f", seleccionada.getDescuentos()), normalFont));
+            document.add(new Paragraph(" - AFP                    : Monto AFP no disponible", normalFont));
+            document.add(new Paragraph(" - Salud (Fonasa/Isapre)  : Monto Salud no disponible", normalFont));
+            document.add(new Paragraph(" - Otros                  : Otros descuentos no disponibles", normalFont));
+
+            document.add(new Paragraph("------------------------------------------------------------", normalFont));
+            document.add(new Paragraph(
+                    String.format("Sueldo Líquido a Pagar    : $%,.0f", seleccionada.getSueldoLiquido()), sectionFont));
+            document.add(new Paragraph("------------------------------------------------------------", normalFont));
 
             document.close();
 
             mostrarAlerta(Alert.AlertType.INFORMATION,
-                    "PDF guardado automáticamente en la carpeta: " + folder.getAbsolutePath());
+                    "PDF guardado correctamente en la carpeta: " + folder.getAbsolutePath());
 
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error al generar PDF: " + e.getMessage());
