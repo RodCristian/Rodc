@@ -6,16 +6,13 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import main.model.Empleado;
 import main.service.EmpleadoService;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class EmpleadoController {
 
-    // Campos del formulario
     @FXML
     private TextField txtRut;
     @FXML
@@ -40,51 +37,13 @@ public class EmpleadoController {
     private TextField txtBuscarRut;
 
     @FXML
-    private TableView<Empleado> tablaEmpleados;
-    @FXML
-    private TableColumn<Empleado, String> colRut;
-    @FXML
-    private TableColumn<Empleado, String> colNombre;
-    @FXML
-    private TableColumn<Empleado, String> colApellido;
-    @FXML
-    private TableColumn<Empleado, String> colFechaIngreso;
-    @FXML
-    private TableColumn<Empleado, String> colCargo;
-    @FXML
-    private TableColumn<Empleado, Double> colSueldoBase;
-    @FXML
-    private TableColumn<Empleado, String> colAfp;
-    @FXML
-    private TableColumn<Empleado, String> colFonasa;
-    @FXML
-    private TableColumn<Empleado, String> colCategoria;
-    @FXML
-    private TableColumn<Empleado, String> colEstado;
-
-    @FXML
     public void initialize() {
-        // Popular combos (puedes cargar desde BDs o archivos si prefieres)
         cmbAfp.getItems().addAll("Modelo", "Provida", "Habitat", "Cuprum", "Capital", "PlanVital");
         cmbFonasa.getItems().addAll("Fonasa", "Isapre Colmena", "Isapre CruzBlanca", "Isapre Consalud",
                 "Isapre Banmedica", "Isapre Vida Tres", "Isapre Nueva Masvida");
         cmbEstado.getItems().addAll("ACTIVO", "SUSPENDIDO", "INACTIVO");
-        // Valor por defecto
         cmbEstado.getSelectionModel().selectFirst();
         dpFechaIngreso.setValue(LocalDate.now());
-
-        colRut.setCellValueFactory(new PropertyValueFactory<>("rut"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
-        colFechaIngreso.setCellValueFactory(new PropertyValueFactory<>("fechaIngreso"));
-        colCargo.setCellValueFactory(new PropertyValueFactory<>("cargo"));
-        colSueldoBase.setCellValueFactory(new PropertyValueFactory<>("sueldoBase"));
-        colAfp.setCellValueFactory(new PropertyValueFactory<>("afp"));
-        colFonasa.setCellValueFactory(new PropertyValueFactory<>("fonasa"));
-        colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-
-        cargarEmpleados();
     }
 
     @FXML
@@ -102,17 +61,68 @@ public class EmpleadoController {
             emp.setCategoria(txtCategoria.getText().trim());
             emp.setEstado(cmbEstado.getValue());
 
-            EmpleadoService.agregarEmpleado(emp);
-            generarYGuardarQR(emp.getRut());
-            // Limpia el formulario y confirma
-            limpiarCampos();
-            mostrarAlerta(Alert.AlertType.INFORMATION, "Empleado guardado");
+            // Verifica si el RUT ya existe
+            boolean esNuevo = (EmpleadoService.buscarEmpleado(emp.getRut()) == null);
 
+            EmpleadoService.agregarEmpleado(emp);
+
+            // Solo genera QR si es nuevo
+            if (esNuevo) {
+                generarYGuardarQR(emp.getRut());
+            }
+
+            limpiarCampos();
+            mostrarAlerta(Alert.AlertType.INFORMATION,
+                    esNuevo ? "Empleado guardado" : "Empleado editado correctamente");
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error: " + e.getMessage());
         }
     }
 
+    @FXML
+    private void buscarPorRut() {
+        String rut = txtBuscarRut.getText().trim();
+        if (!rut.isEmpty()) {
+            Empleado emp = EmpleadoService.buscarEmpleado(rut);
+            if (emp != null) {
+                txtRut.setText(emp.getRut());
+                txtNombre.setText(emp.getNombre());
+                txtApellido.setText(emp.getApellido());
+                dpFechaIngreso.setValue(emp.getFechaIngreso());
+                txtCargo.setText(emp.getCargo());
+                txtSueldoBase.setText(String.valueOf(emp.getSueldoBase()));
+                cmbAfp.setValue(emp.getAfp());
+                cmbFonasa.setValue(emp.getFonasa());
+                txtCategoria.setText(emp.getCategoria());
+                cmbEstado.setValue(emp.getEstado());
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Empleado encontrado. Puedes editar o eliminar.");
+            } else {
+                mostrarAlerta(Alert.AlertType.INFORMATION, "No se encontró el empleado con ese RUT.");
+                limpiarCampos();
+            }
+        } else {
+            mostrarAlerta(Alert.AlertType.WARNING, "Ingresa un RUT para buscar.");
+        }
+    }
+
+    @FXML
+    private void eliminarEmpleado() {
+        String rut = txtRut.getText().trim();
+        if (!rut.isEmpty()) {
+            Empleado emp = EmpleadoService.buscarEmpleado(rut);
+            if (emp != null) {
+                EmpleadoService.eliminarEmpleado(rut);
+                limpiarCampos();
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Empleado eliminado correctamente.");
+            } else {
+                mostrarAlerta(Alert.AlertType.WARNING, "No se encontró un empleado con ese RUT.");
+            }
+        } else {
+            mostrarAlerta(Alert.AlertType.WARNING, "No hay un RUT para eliminar.");
+        }
+    }
+
+    @FXML
     private void limpiarCampos() {
         txtRut.clear();
         txtNombre.clear();
@@ -124,6 +134,7 @@ public class EmpleadoController {
         cmbAfp.getSelectionModel().clearSelection();
         cmbFonasa.getSelectionModel().clearSelection();
         cmbEstado.getSelectionModel().selectFirst();
+        txtBuscarRut.clear();
     }
 
     private void mostrarAlerta(Alert.AlertType tipo, String mensaje) {
@@ -133,68 +144,21 @@ public class EmpleadoController {
         alert.showAndWait();
     }
 
-    private void cargarEmpleados() {
-        List<Empleado> empleados = EmpleadoService.obtenerEmpleados();
-        tablaEmpleados.getItems().setAll(empleados);
-    }
-
-    @FXML
-    private void refrescarTabla() {
-        cargarEmpleados();
-    }
-
-    @FXML
-    private void eliminarEmpleado() {
-        Empleado seleccionado = tablaEmpleados.getSelectionModel().getSelectedItem();
-        if (seleccionado != null) {
-            EmpleadoService.eliminarEmpleado(seleccionado.getRut());
-            cargarEmpleados();
-            mostrarAlerta(Alert.AlertType.INFORMATION, "Empleado eliminado correctamente.");
-        } else {
-            mostrarAlerta(Alert.AlertType.WARNING, "Selecciona un empleado para eliminar.");
-        }
-    }
-
-    @FXML
-    private void buscarPorRut() {
-        String rut = txtBuscarRut.getText().trim();
-        if (!rut.isEmpty()) {
-            Empleado emp = EmpleadoService.buscarEmpleado(rut);
-            if (emp != null) {
-                tablaEmpleados.getItems().setAll(emp);
-            } else {
-                mostrarAlerta(Alert.AlertType.INFORMATION, "No se encontró el empleado con ese RUT.");
-            }
-        } else {
-            cargarEmpleados();
-        }
-    }
-
     private void generarYGuardarQR(String rut) {
         try {
-            // Crear el código QR
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(rut, BarcodeFormat.QR_CODE, 200, 200);
-
-            // Carpeta predeterminada
             String folderPath = "QR";
             java.io.File folder = new java.io.File(folderPath);
             if (!folder.exists()) {
-                folder.mkdirs(); // crea la carpeta si no existe
+                folder.mkdirs();
             }
-
-            // Nombre de archivo (ej: QR_12345678-9.png)
             String nombreArchivo = "QR_" + rut + ".png";
             java.io.File file = new java.io.File(folder, nombreArchivo);
-
-            // Guardar el QR como imagen PNG
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", file.toPath());
-
             mostrarAlerta(Alert.AlertType.INFORMATION, "QR guardado automáticamente en: " + file.getAbsolutePath());
-
         } catch (Exception e) {
             mostrarAlerta(Alert.AlertType.ERROR, "Error al generar QR: " + e.getMessage());
         }
     }
-
 }

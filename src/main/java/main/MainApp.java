@@ -58,7 +58,7 @@ public class MainApp extends Application {
         // Simula carga (5 segundos) y luego cierra splash
         new Thread(() -> {
             try {
-                Thread.sleep(5000); // Puedes ajustar el tiempo
+                Thread.sleep(1000); // Puedes ajustar el tiempo
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

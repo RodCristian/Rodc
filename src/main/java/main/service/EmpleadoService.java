@@ -14,7 +14,17 @@ public class EmpleadoService {
     public static void agregarEmpleado(Empleado emp) {
         String sql = "INSERT INTO EMPLEADO (rut, nombre, apellido, fecha_ingreso, cargo, sueldo_base, afp, fonasa, categoria, estado) "
                 +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
+                "ON CONFLICT(rut) DO UPDATE SET " +
+                "nombre=excluded.nombre, " +
+                "apellido=excluded.apellido, " +
+                "fecha_ingreso=excluded.fecha_ingreso, " +
+                "cargo=excluded.cargo, " +
+                "sueldo_base=excluded.sueldo_base, " +
+                "afp=excluded.afp, " +
+                "fonasa=excluded.fonasa, " +
+                "categoria=excluded.categoria, " +
+                "estado=excluded.estado";
 
         try (Connection conn = ConexionBD.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -31,10 +41,10 @@ public class EmpleadoService {
             stmt.setString(10, emp.getEstado());
 
             stmt.executeUpdate();
-            System.out.println("✅ Empleado agregado correctamente.");
+            System.out.println("✔️ Empleado agregado o actualizado correctamente.");
 
         } catch (SQLException e) {
-            System.out.println("❌ Error al agregar empleado: " + e.getMessage());
+            System.out.println("❌ Error al agregar o actualizar empleado: " + e.getMessage());
         }
     }
 
