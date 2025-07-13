@@ -5,6 +5,8 @@ C:\Users\USER\Desktop\RODC\src\main\java\main\model\Asistencia.java
 C:\Users\USER\Desktop\RODC\src\main\java\main\model\Descuento.java
 C:\Users\USER\Desktop\RODC\src\main\java\main\model\Empleado.java
 C:\Users\USER\Desktop\RODC\src\main\java\main\model\Liquidacion.java
+C:\Users\USER\Desktop\RODC\src\main\java\main\qr\LectorQR.java
+C:\Users\USER\Desktop\RODC\src\main\java\main\qr\ListaCamaras.java
 C:\Users\USER\Desktop\RODC\src\main\java\main\service\AsistenciaService.java
 C:\Users\USER\Desktop\RODC\src\main\java\main\service\EmpleadoService.java
 C:\Users\USER\Desktop\RODC\src\main\java\main\service\LiquidacionService.java

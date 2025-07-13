@@ -20,6 +20,7 @@
                 <Button text="Marcar Asistencia" onAction="#marcarAsistencia"/>
                 <Button text="Marcar con QR" onAction="#marcarAsistenciaQR"/>
                 <Button text="🔄 Refrescar" onAction="#refrescarTabla"/>
+                <Button text="Iniciar Lector QR" onAction="#abrirLectorQR" />
             </HBox>
 
             <TableView fx:id="tablaAsistencias" prefHeight="250">

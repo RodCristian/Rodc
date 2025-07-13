@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import main.model.Asistencia;
+import main.qr.LectorQR;
 import main.service.AsistenciaService;
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
@@ -127,4 +128,9 @@ public class AsistenciaController {
         cargarAsistencias();
     }
 
+    @FXML
+    private void abrirLectorQR() {
+        LectorQR lector = new LectorQR();
+        lector.iniciarLector();
+    }
 }

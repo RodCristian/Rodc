@@ -129,4 +129,41 @@ public class AsistenciaService {
         }
         return totalHoras;
     }
+
+    public static boolean tieneEntradaHoy(String rut, LocalDate fecha) {
+        String sql = "SELECT COUNT(*) FROM ASISTENCIA WHERE rut_empleado = ? AND fecha = ? AND tipo = 'entrada'";
+        try (Connection conn = ConexionBD.conectar();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, rut);
+            stmt.setString(2, fecha.toString());
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            System.out.println("❌ Error verificando entrada: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public static String obtenerUltimoTipoHoy(String rut, LocalDate fecha) {
+        String sql = "SELECT tipo FROM ASISTENCIA WHERE rut_empleado = ? AND fecha = ? ORDER BY hora DESC LIMIT 1";
+        try (Connection conn = ConexionBD.conectar();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, rut);
+            stmt.setString(2, fecha.toString());
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("tipo");
+            }
+        } catch (Exception e) {
+            System.out.println("❌ Error obteniendo último tipo: " + e.getMessage());
+        }
+        return null; // No tiene registros hoy
+    }
+
 }

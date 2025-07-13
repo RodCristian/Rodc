@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.database.InicializadorBD;
@@ -29,7 +30,7 @@ public class MainApp extends Application {
 
                     Scene scene = new Scene(root);
                     scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
-                    primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/Logo.png")));
+                    primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo1.png")));
                     primaryStage.setScene(scene);
                     primaryStage.setTitle("RODC - Sistema de Gestión de Asistencia y Liquidación de Sueldos");
                     primaryStage.show();
@@ -41,24 +42,25 @@ public class MainApp extends Application {
     }
 
     private void showSplash(Runnable onComplete) {
-        Stage splashStage = new Stage(StageStyle.UNDECORATED);
-        ImageView logo = new ImageView(new Image(getClass().getResourceAsStream("/images/Logo.png")));
+        Stage splashStage = new Stage(StageStyle.TRANSPARENT);
+        ImageView logo = new ImageView(new Image(getClass().getResourceAsStream("/images/logo3.png")));
         logo.setFitWidth(SPLASH_WIDTH);
         logo.setPreserveRatio(true);
 
         StackPane splashLayout = new StackPane(logo);
-        splashLayout.setStyle("-fx-background-color: white;");
+        splashLayout.setStyle("-fx-background-color: transparent;");
         splashLayout.setAlignment(Pos.CENTER);
 
-        Scene splashScene = new Scene(splashLayout, SPLASH_WIDTH, SPLASH_HEIGHT);
+        Scene splashScene = new Scene(splashLayout, 500, 500, Color.TRANSPARENT);
+        splashScene.setFill(Color.TRANSPARENT);
         splashStage.setScene(splashScene);
         splashStage.centerOnScreen();
         splashStage.show();
 
-        // Simula carga (5 segundos) y luego cierra splash
+        // Simula carga (x segundos) y luego cierra splash
         new Thread(() -> {
             try {
-                Thread.sleep(1000); // Puedes ajustar el tiempo
+                Thread.sleep(3000); // Puedes ajustar el tiempo
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
