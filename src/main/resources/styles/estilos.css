@@ -1,129 +1,131 @@
-/* Tipografía y base */
+/* Base y tipografía */
 .root {
     -fx-font-family: "Segoe UI", "Roboto", "Arial", sans-serif;
-    -fx-font-size: 15px;
-    -fx-background-color: linear-gradient(to bottom, #f8fafc, #e8edf3);
+    -fx-font-size: 14px;
+    -fx-background-color: #f4f6f8;
+    -fx-padding: 10;
+    -fx-text-fill: #333;
 }
 
-/* Barra de Menú */
+/* Barra de menú */
 .menu-bar {
-    -fx-background-color: linear-gradient(to right, #2c3e50, #2980b9);
-    -fx-border-width: 0 0 2 0;
-    -fx-border-color: transparent transparent #2980b9 transparent;
-    -fx-effect: dropshadow(gaussian, #00000033, 3, 0, 0, 1);
+    -fx-background-color: #2b3e50;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #1f2d3a;
+    -fx-effect: none;
 }
 
 .menu {
-    -fx-text-fill: #fff;
-    /* -fx-font-weight: bold; */ /* <-- Eliminado */
-    -fx-padding: 0 16 0 16;
+    -fx-text-fill: #f0f0f0;
+    -fx-padding: 0 14 0 14;
+    -fx-font-weight: 600;
 }
 
 .menu-item {
     -fx-background-color: transparent;
-    -fx-text-fill: #222;
-    -fx-font-size: 14px;
+    -fx-text-fill: #2b3e50;
+    -fx-font-size: 13px;
 }
+
 .menu-item:hover {
-    -fx-background-color: #e3e9f3;
-    -fx-text-fill: #207cca;
+    -fx-background-color: #d3e0ea;
+    -fx-text-fill: #1a3a63;
 }
 
 /* Panel central */
 #contenidoPane {
-    -fx-background-color: rgba(129, 211, 233, 0.18);
-    -fx-border-color: #207cca;
-    -fx-border-width: 1.5;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-padding: 18;
-    -fx-effect: dropshadow(gaussian, #98c8e8cc, 8, 0, 0, 2);
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c4c9d1;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, #b0bec5cc, 5, 0, 0, 1);
 }
 
 /* Botones */
 .button {
-    -fx-background-color: linear-gradient(to bottom, #207cca 0%, #3498db 100%);
-    -fx-text-fill: #fff;
-    -fx-font-size: 14px;
-    /* -fx-font-weight: bold; */ /* <-- Eliminado */
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-    -fx-padding: 7 18 7 18;
-    -fx-border-color: #176ba0;
-    -fx-border-width: 1;
+    -fx-background-color: #1e88e5;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-padding: 6 14 6 14;
+    -fx-border-color: transparent;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, #acd6ea77, 5, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, #90caf9cc, 3, 0, 0, 1);
+    -fx-transition: background-color 0.2s ease;
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(to bottom, #176ba0 0%, #207cca 100%);
-    -fx-effect: dropshadow(gaussian, #176ba0aa, 10, 0, 0, 2);
-    -fx-text-fill: #e3e9f3;
+    -fx-background-color: #1565c0;
+    -fx-effect: dropshadow(gaussian, #1565c0aa, 6, 0, 0, 2);
 }
 
 /* TextField y ComboBox */
 .text-field, .combo-box {
     -fx-background-color: #fff;
-    -fx-border-color: #207cca;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
+    -fx-border-color: #a9b7c6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
     -fx-padding: 5 10 5 10;
     -fx-font-size: 13px;
-}
-.text-field:focused, .combo-box:focused {
-    -fx-border-color: #2980b9;
-    -fx-effect: dropshadow(gaussian, #207cca44, 6, 0, 0, 1);
+    -fx-text-fill: #333;
+    -fx-transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Mejorar la fuente y el color en la tabla */
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: #1e88e5;
+    -fx-effect: dropshadow(gaussian, #90caf9f0, 5, 0, 0, 1);
+}
+
+/* Tabla */
 .table-view {
-    -fx-font-size: 15px;
-    -fx-background-color: #f8fafc;
-    -fx-border-color: #207cca;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-table-cell-border-color: #e3e9f3;
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff; /* Fondo blanco para máxima claridad */
+    -fx-border-color: #b0bec5; /* borde sutil gris azulado */
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-table-cell-border-color: #cfd8dc; /* líneas divisorias claras */
+    -fx-padding: 0;
 }
 
 .table-row-cell {
-    -fx-font-size: 15px;
-    -fx-text-fill: #222; /* color de texto oscuro */
-}
-
-.table-row-cell:selected {
-    -fx-background-color: linear-gradient(to right, #c2e9fb, #83a4d4);
-    -fx-text-fill: #222; /* color de texto para fila seleccionada */
-}
-
-.table-cell {
-    -fx-padding: 8 10 8 10; /* más espacio en las celdas */
-    -fx-font-size: 15px;
-    -fx-text-fill: #222; /* texto oscuro */
+    -fx-font-size: 14px;
+    -fx-text-fill: #263238; /* texto gris oscuro */
     -fx-background-color: transparent;
 }
 
+.table-row-cell:filled:selected, .table-row-cell:selected:hover {
+    -fx-background-color: #90caf9; /* azul claro para selección */
+    -fx-text-fill: #0d47a1; /* azul oscuro texto seleccionado */
+}
+
+.table-cell {
+    -fx-padding: 8 12 8 12; /* un poco más de padding para respiración */
+    -fx-font-size: 14px;
+    -fx-text-fill: #263238; /* texto gris oscuro */
+    -fx-background-color: transparent;
+    -fx-border-color: #cfd8dc; /* línea fina entre celdas */
+    -fx-border-width: 0 0 1 0; /* línea solo abajo */
+}
+
 .table-column-header-background {
-    -fx-background-color: linear-gradient(to top, #207cca, #3498db);
+    -fx-background-color: linear-gradient(to bottom, #e3f2fd, #bbdefb); /* encabezado azul degradado */
 }
 
 .table-column-header, .table-column {
-    -fx-text-fill: #030303;
-    -fx-font-size: 16px;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: #b2d8f7;
-}
-
-/* Etiquetas y títulos */
-.label, .text {
+    -fx-text-fill: #1565c0; /* azul oscuro para texto encabezado */
     -fx-font-size: 15px;
-    -fx-text-fill: #222;
+    -fx-font-weight: 700;
+    -fx-border-color: #90caf9; /* borde para columnas */
+    -fx-border-width: 0 0 2 0; /* línea debajo del encabezado */
 }
 
-.label.title, .text.title {
-    -fx-font-size: 22px;
-    /* -fx-font-weight: bold; */ /* <-- Eliminado */
-    -fx-text-fill: #207cca;
-    -fx-effect: dropshadow(gaussian, #acd6ea77, 3, 0, 0, 1);
+/* Scrollbar (opcional para tabla) */
+.table-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
 }
+

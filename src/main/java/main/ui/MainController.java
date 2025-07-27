@@ -46,6 +46,11 @@ public class MainController {
     }
 
     @FXML
+    private void mostrarInventario(ActionEvent event) {
+        cargarModulo("/inventario.fxml");
+    }
+
+    @FXML
     private void mostrarLiquidaciones(ActionEvent event) {
         cargarModulo("/liquidacion.fxml");
     }

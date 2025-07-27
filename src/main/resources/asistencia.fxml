@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="main.ui.AsistenciaController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="main.ui.AsistenciaController">
     <children>
-        <VBox spacing="20" style="-fx-background-color: #f4f4f4;" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <VBox prefHeight="429.0" prefWidth="851.0" spacing="20" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="-91.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
             <HBox spacing="10">
-                <Label text="RUT:"/>
-                <TextField fx:id="txtRut" promptText="Ingrese RUT o escanee QR" prefWidth="180"/>
-                <Label text="Tipo:"/>
-                <ComboBox fx:id="cmbTipo" prefWidth="120"/>
-                <Button text="Marcar Asistencia" onAction="#marcarAsistencia"/>
-                <Button text="Marcar con QR" onAction="#marcarAsistenciaQR"/>
-                <Button text="🔄 Refrescar" onAction="#refrescarTabla"/>
-                <Button text="Iniciar Lector QR" onAction="#abrirLectorQR" />
+                <Label text="RUT:" />
+                <TextField fx:id="txtRut" prefWidth="180" promptText="Ingrese RUT o escanee QR" />
+                <Label text="Tipo:" />
+                <ComboBox fx:id="cmbTipo" prefWidth="120" />
+                <Button onAction="#marcarAsistencia" text="Marcar Asistencia" />
+                <Button onAction="#marcarAsistenciaQR" text="Marcar con QR" />
             </HBox>
 
             <TableView fx:id="tablaAsistencias" prefHeight="250">
                 <columns>
-                    <TableColumn fx:id="colFecha" text="Fecha"/>
-                    <TableColumn fx:id="colHora" text="Hora"/>
-                    <TableColumn fx:id="colRut" text="RUT"/>
-                    <TableColumn fx:id="colTipo" text="Tipo"/>
+                    <TableColumn fx:id="colFecha" text="Fecha" />
+                    <TableColumn fx:id="colHora" text="Hora" />
+                    <TableColumn fx:id="colRut" text="RUT" />
+                    <TableColumn fx:id="colTipo" text="Tipo" />
                 </columns>
             </TableView>
+             <Button onAction="#refrescarTabla" text="🔄 Refrescar" />
+             <Button onAction="#abrirLectorQR" text="Iniciar Lector QR" />
         </VBox>
     </children>
 </AnchorPane>

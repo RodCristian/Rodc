@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07708300-6ad9-4edb-bbc4-1cd4e32d4ac4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../asistencia.db" beforeDir="false" afterPath="$PROJECT_DIR$/../asistencia.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/main/service/AsistenciaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/main/service/AsistenciaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/main/ui/EmpleadoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/main/ui/EmpleadoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/main/ui/LiquidacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/main/ui/LiquidacionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/main/service/AsistenciaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../target/classes/main/service/AsistenciaService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/main/ui/EmpleadoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../target/classes/main/ui/EmpleadoController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/main/ui/LiquidacionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../target/classes/main/ui/LiquidacionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Liquidaciones/Liquidacion_19613150-7.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,25 +12,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2zWgdRikDbUvyfL3kJqDI6i1kNi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -53,6 +47,7 @@
       <option name="presentableId" value="Default" />
       <updated>1751852334568</updated>
       <workItem from="1751852336971" duration="12000" />
+      <workItem from="1752897715945" duration="4000" />
     </task>
     <servers />
   </component>

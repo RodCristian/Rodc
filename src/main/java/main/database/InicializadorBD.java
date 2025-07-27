@@ -58,6 +58,32 @@ public class InicializadorBD {
                         );
                     """);
 
+            stmt.execute("""
+                        CREATE TABLE IF NOT EXISTS PRODUCTO (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            nombre TEXT NOT NULL,
+                            cantidad INTEGER NOT NULL
+                        );
+                    """);
+            stmt.execute("""
+                        CREATE TABLE IF NOT EXISTS CONSUMO_PLANTA (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            producto_id INTEGER NOT NULL,
+                            cantidad_usada INTEGER NOT NULL,
+                            fecha TEXT NOT NULL,
+                            FOREIGN KEY (producto_id) REFERENCES PRODUCTO(id)
+                        );
+                    """);
+            stmt.execute("""
+                        CREATE TABLE IF NOT EXISTS PRODUCCION_PLANTA (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            producto_id INTEGER NOT NULL,
+                            fecha TEXT NOT NULL,
+                            cantidad_producida INTEGER NOT NULL,
+                            FOREIGN KEY (producto_id) REFERENCES PRODUCTO(id)
+                        );
+                    """);
+
             System.out.println("✅ Todas las tablas fueron creadas correctamente.");
 
         } catch (Exception e) {
