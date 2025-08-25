@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -7,62 +8,64 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #d0f0c0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ui.PlantaController">
-
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="main.ui.PlantaController"
+            prefWidth="700" prefHeight="550" styleClass="fondo-planta">
     <children>
+        <VBox spacing="12" alignment="TOP_CENTER" prefWidth="660" prefHeight="440"
+              AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20"
+              styleClass="panel-blanco">
+            <padding>
+                <Insets top="18" right="18" bottom="18" left="18"/>
+            </padding>
+            <!-- Título destacado -->
+            <Label text="PLANTA" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #ff6c37;" alignment="CENTER"/>
 
-        <!-- Título -->
-        <Label layoutX="260.0" layoutY="14.0" text="PLANTA">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
+            <!-- Fecha -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Fecha:" style="-fx-font-size: 15px;"/>
+                <DatePicker fx:id="fechaPicker" prefWidth="160"/>
+            </HBox>
 
-        <!-- Fecha -->
-        <Label layoutX="30.0" layoutY="60.0" text="Fecha:" />
-        <DatePicker fx:id="fechaPicker" layoutX="90.0" layoutY="55.0" prefWidth="150.0" />
+            <!-- Registro de Consumo -->
+            <Label text="Registrar Consumo:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Producto:"/>
+                <ComboBox fx:id="productoComboBox" prefWidth="200"/>
+                <Label text="Cantidad Usada:"/>
+                <TextField fx:id="cantidadField" prefWidth="80"/>
+            </HBox>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button text="Registrar" prefWidth="150" onAction="#registrarConsumo"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Actualizar" prefWidth="150" onAction="#actualizarStock"/>
+            </HBox>
 
-         <!-- Registro de Consumo -->
-        <Label layoutX="30.0" layoutY="110.0" style="-fx-font-weight: bold;" text="Registrar Consumo:" />
+            <!-- Registro de Producción -->
+            <Label text="Registrar Producción:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Producto:"/>
+                <ComboBox fx:id="productoProduccionComboBox" prefWidth="200"/>
+                <Label text="Cantidad Producida:"/>
+                <TextField fx:id="cantidadProduccionField" prefWidth="80"/>
+            </HBox>
+            <HBox spacing="16" alignment="CENTER_LEFT">
+                <Button text="Registrar" prefWidth="180" onAction="#registrarProduccion" styleClass="btn2"/>
+            </HBox>
 
-        <!-- Producto -->
-        <Label layoutX="30.0" layoutY="140.0" text="Producto:" />
-        <ComboBox fx:id="productoComboBox" layoutX="123.0" layoutY="135.0" prefWidth="200.0" />
-
-        <!-- Cantidad usada -->
-        <Label layoutX="30.0" layoutY="180.0" text="Cantidad Usada:" />
-        <TextField fx:id="cantidadField" layoutX="160.0" layoutY="175.0" prefWidth="80.0" />
-
-        <!-- Botón Registrar Consumo -->
-        <Button layoutX="387.0" layoutY="135.0" onAction="#registrarConsumo" prefWidth="130.0" text="Registrar" />
-
-        <!-- Botón Actualizar Stock -->
-        <Button layoutX="387.0" layoutY="176.0" onAction="#actualizarStock" prefWidth="130.0" text="Actualizar" />
-
-         <!-- Tabla de Consumos -->
-        <Label layoutX="30.0" layoutY="220.0" style="-fx-font-weight: bold;" text="Registrar Producción:" />
-
-        <!-- Producto -->
-        <Label layoutX="30.0" layoutY="250.0" text="Producto:" />
-        <ComboBox fx:id="productoProduccionComboBox" layoutX="151.0" layoutY="245.0" prefWidth="200.0" />
-
-        <!-- Cantidad producida -->
-        <Label layoutX="30.0" layoutY="290.0" text="Cantidad Producida:" />
-        <TextField fx:id="cantidadProduccionField" layoutX="200.0" layoutY="286.0" prefWidth="80.0" />
-
-        <!-- Botón Registrar Producción -->
-        <Button layoutX="387.0" layoutY="245.0" onAction="#registrarProduccion" prefWidth="130.0" text="Registrar" />
-
-        <!-- Tabla de consumos y producciones -->
-        <TableView fx:id="consumoTableView" layoutX="30.0" layoutY="330.0" prefHeight="100.0" prefWidth="580.0">
-            <columns>
-                <TableColumn fx:id="nombreColumn" prefWidth="300.0" text="Producto" />
-                <TableColumn fx:id="cantidadColumn" prefWidth="250.0" text="Cantidad" />
-            </columns>
-        </TableView>
-
+            <!-- Tabla de consumos y producciones -->
+            <TableView fx:id="consumoTableView" maxHeight="250"  minWidth="350" maxWidth="600">
+                <columns>
+                    <TableColumn fx:id="nombreColumn" text="Producto" prefWidth="320"/>
+                    <TableColumn fx:id="cantidadColumn" text="Cantidad" prefWidth="180"/>
+                </columns>
+            </TableView>
+        </VBox>
     </children>
-</Pane>
+</AnchorPane>

@@ -11,9 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="main.ui.AsistenciaController">
+<AnchorPane id="VBox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="main.ui.AsistenciaController">
     <children>
-        <VBox prefHeight="429.0" prefWidth="851.0" spacing="20" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="-91.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox prefHeight="429.0" prefWidth="851.0" spacing="20"
+              styleClass="panel-blanco"
+              AnchorPane.bottomAnchor="-91.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
                 <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
@@ -21,21 +24,21 @@
                 <Label text="RUT:" />
                 <TextField fx:id="txtRut" prefWidth="180" promptText="Ingrese RUT o escanee QR" />
                 <Label text="Tipo:" />
-                <ComboBox fx:id="cmbTipo" prefWidth="120" />
+                <ComboBox fx:id="cmbTipo" prefWidth="150" />
                 <Button onAction="#marcarAsistencia" text="Marcar Asistencia" />
                 <Button onAction="#marcarAsistenciaQR" text="Marcar con QR" />
             </HBox>
 
-            <TableView fx:id="tablaAsistencias" prefHeight="250">
+            <TableView fx:id="tablaAsistencias" maxWidth="600" minWidth="400">
                 <columns>
-                    <TableColumn fx:id="colFecha" text="Fecha" />
-                    <TableColumn fx:id="colHora" text="Hora" />
-                    <TableColumn fx:id="colRut" text="RUT" />
-                    <TableColumn fx:id="colTipo" text="Tipo" />
+                    <TableColumn fx:id="colFecha" text="Fecha" prefWidth="150" />
+                    <TableColumn fx:id="colHora" text="Hora" prefWidth="150"/> 
+                    <TableColumn fx:id="colRut" text="RUT" prefWidth="150"/>
+                    <TableColumn fx:id="colTipo" text="Tipo" prefWidth="150" />
                 </columns>
             </TableView>
-             <Button onAction="#refrescarTabla" text="🔄 Refrescar" />
-             <Button onAction="#abrirLectorQR" text="Iniciar Lector QR" />
+            <Button onAction="#refrescarTabla" text="🔄 Refrescar" />
+            <Button onAction="#abrirLectorQR" text="Iniciar Lector QR" />
         </VBox>
     </children>
 </AnchorPane>

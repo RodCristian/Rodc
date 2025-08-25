@@ -6,9 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="main.ui.LiquidacionController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="main.ui.LiquidacionController" styleClass="root">
     <children>
-        <VBox spacing="20" style="-fx-background-color: #f4f4f4;" layoutX="14.0" layoutY="14.0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <VBox spacing="20" layoutX="14.0" layoutY="14.0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" styleClass="panel-blanco">
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
@@ -22,15 +22,15 @@
                 <Button text="Generar Liquidación" onAction="#generarLiquidacion"/>
             </HBox>
 
-            <TableView fx:id="tablaLiquidaciones" prefHeight="250">
+            <TableView fx:id="tablaLiquidaciones" maxWidth="600" minWidth="400" >
                 <columns>
-                    <TableColumn fx:id="colMes" text="Mes"/>
-                    <TableColumn fx:id="colSueldoBase" text="Sueldo Base"/>
-                    <TableColumn fx:id="colTotalHoras" text="Horas"/>
-                    <TableColumn fx:id="colBonificaciones" text="Bonificaciones"/>
-                    <TableColumn fx:id="colDescuentos" text="Descuentos"/>
-                    <TableColumn fx:id="colSueldoLiquido" text="Sueldo Líquido"/>
-                    <TableColumn fx:id="colFechaGeneracion" text="Fecha Generación"/>
+                    <TableColumn fx:id="colMes" text="Mes" prefWidth="120"/>
+                    <TableColumn fx:id="colSueldoBase" text="Sueldo Base" prefWidth="120"/>
+                    <TableColumn fx:id="colTotalHoras" text="Horas" prefWidth="120"/>
+                    <TableColumn fx:id="colBonificaciones" text="Bonificaciones" prefWidth="120"/>
+                    <TableColumn fx:id="colDescuentos" text="Descuentos" prefWidth="120"/>
+                    <TableColumn fx:id="colSueldoLiquido" text="Sueldo Líquido" prefWidth="120"/>
+                    <TableColumn fx:id="colFechaGeneracion" text="Fecha Generación" prefWidth="120"/>
                 </columns>
             </TableView>
 

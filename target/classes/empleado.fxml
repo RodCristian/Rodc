@@ -1,62 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
 
-<AnchorPane prefHeight="600" prefWidth="900" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ui.EmpleadoController">
-    <TitledPane collapsible="false" expanded="true" layoutX="30" layoutY="20" prefWidth="830" text="Datos Personales del Trabajador">
-        <content>
-            <AnchorPane prefHeight="220" prefWidth="800">
-                <children>
-                    <Label layoutX="30" layoutY="30" text="RUT:" />
-                    <TextField fx:id="txtRut" layoutX="150" layoutY="25" prefWidth="200" />
+<AnchorPane prefHeight="600" prefWidth="1100" styleClass="root" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ui.EmpleadoController">
+    <children>
+        <!-- Panel Datos Personales -->
+        <VBox spacing="14" styleClass="panel-blanco"
+              prefWidth="1000" prefHeight="220"
+              AnchorPane.topAnchor="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+            <padding>
+                <Insets bottom="18" left="18" right="18" top="18"/>
+            </padding>
+            <Label styleClass="seccion-titulo" text="Datos Personales del Trabajador"/>
+            <GridPane hgap="18" vgap="10">
+                <Label text="RUT:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtRut" prefWidth="140" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <TextField fx:id="txtNombre" prefWidth="140" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                <Label text="Apellido:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtApellido" prefWidth="140" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Fecha de ingreso:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                <DatePicker fx:id="dpFechaIngreso" prefWidth="140" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                <Label text="Buscar por RUT:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtBuscarRut" prefWidth="140" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Button onAction="#buscarPorRut" prefWidth="100" text="Buscar" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+            </GridPane>
+        </VBox>
 
-                    <Label layoutX="400" layoutY="30" text="Nombre:" />
-                    <TextField fx:id="txtNombre" layoutX="500" layoutY="25" prefWidth="200" />
+        <!-- Panel Datos para Liquidaciones -->
+        <VBox spacing="14" styleClass="panel-blanco"
+              prefWidth="1000" prefHeight="220"
+              AnchorPane.topAnchor="260" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+            <padding>
+                <Insets bottom="18" left="18" right="18" top="18"/>
+            </padding>
+            <Label styleClass="seccion-titulo" text="Datos para Liquidaciones"/>
+            <GridPane hgap="18" vgap="10">
+                <Label text="Cargo:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtCargo" prefWidth="120" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Sueldo base:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <TextField fx:id="txtSueldoBase" prefWidth="120" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                <Label text="AFP:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cmbAfp" prefWidth="180" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Estado:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                <ComboBox fx:id="cmbEstado" prefWidth="180" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                <Label text="Fonasa/Isapre:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cmbFonasa" prefWidth="180" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label text="Categoría:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                <TextField fx:id="txtCategoria" prefWidth="100" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+            </GridPane>
+        </VBox>
 
-                    <Label layoutX="30" layoutY="80" text="Apellido:" />
-                    <TextField fx:id="txtApellido" layoutX="150" layoutY="75" prefWidth="200" />
-
-                    <Label layoutX="400" layoutY="80" text="Fecha de ingreso:" />
-                    <DatePicker fx:id="dpFechaIngreso" layoutX="530" layoutY="75" prefWidth="170" />
-            
-                <Label layoutX="370.0" layoutY="162.0" text="Buscar por RUT:" />
-                <TextField fx:id="txtBuscarRut" layoutX="495.0" layoutY="157.0" prefWidth="170" />
-                <Button layoutX="680.0" layoutY="157.0" onAction="#buscarPorRut" prefWidth="120" style="-fx-font-size: 14px;" text="Buscar" />
-                </children>
-            </AnchorPane>
-        </content>
-    </TitledPane>
-
-    <TitledPane collapsible="false" expanded="true" layoutX="30" layoutY="260" prefWidth="830" text="Datos para Liquidaciones">
-        <content>
-            <AnchorPane prefHeight="220" prefWidth="800">
-                <children>
-                    <Label layoutX="30" layoutY="30" text="Cargo:" />
-                    <TextField fx:id="txtCargo" layoutX="150" layoutY="25" prefWidth="200" />
-
-                    <Label layoutX="400" layoutY="30" text="Sueldo base:" />
-                    <TextField fx:id="txtSueldoBase" layoutX="530" layoutY="25" prefWidth="170" />
-
-                    <Label layoutX="30" layoutY="80" text="AFP:" />
-                    <ComboBox fx:id="cmbAfp" layoutX="150" layoutY="75" prefWidth="200" />
-                    <Label layoutX="30" layoutY="130" text="Estado:" />
-                    <ComboBox fx:id="cmbEstado" layoutX="150" layoutY="125" prefWidth="200" />
-                    <Label layoutX="400" layoutY="80" text="Fonasa/Isapre:" />
-                    <ComboBox fx:id="cmbFonasa" layoutX="530" layoutY="75" prefWidth="170" />
-                    <Label layoutX="400" layoutY="130" text="Categoría:" />
-                    <TextField fx:id="txtCategoria" layoutX="530" layoutY="125" prefWidth="50" />
-                <Button layoutX="600.0" layoutY="177.0" onAction="#limpiarCampos" prefWidth="200" style="-fx-font-size: 14px;" text="Limpiar" />
-                </children>
-            </AnchorPane>
-        </content>
-    </TitledPane>
-
-    <Button layoutX="30.0" layoutY="550.0" onAction="#guardarEmpleado" prefWidth="200" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Guardar" />
-    <Button layoutX="633.0" layoutY="550.0" onAction="#eliminarEmpleado" prefWidth="200" style="-fx-font-size: 14px; -fx-background-color: #e57373; -fx-text-fill: white;" text="Eliminar" />
+        <!-- Botones de acción generales ordenados -->
+        <HBox spacing="18" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" alignment="CENTER">
+            <Button onAction="#guardarEmpleado" prefWidth="200" text="Guardar"/>
+            <Button onAction="#limpiarCampos" prefWidth="200" text="Limpiar"/>
+            <Button onAction="#eliminarEmpleado" prefWidth="200" style="-fx-background-color: #e57373; -fx-text-fill: white;" text="Eliminar"/>
+        </HBox>
+    </children>
 </AnchorPane>
